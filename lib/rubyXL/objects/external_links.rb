@@ -55,11 +55,16 @@ module RubyXL
     define_element_name 'sheetDataSet'
   end
 
+  class AlternateUrls < OOXMLObject
+    define_element_name 'alternateUrls'
+  end
+
   # http://www.datypic.com/sc/ooxml/e-ssml_externalBook-1.html
   class ExternalBook < OOXMLObject
     define_child_node(RubyXL::SheetNames)
     define_child_node(RubyXL::DefinedNamesExt)
     define_child_node(RubyXL::SheetDataSet)
+    define_child_node(RubyXL::AlternateUrls)
     define_relationship(:required => true)
     define_element_name 'externalBook'
   end
@@ -98,7 +103,8 @@ module RubyXL
     define_element_name 'externalLink'
     set_namespaces('http://schemas.openxmlformats.org/spreadsheetml/2006/main'           => nil,
                    'http://schemas.openxmlformats.org/markup-compatibility/2006'         => 'mc',
-                   'http://schemas.openxmlformats.org/officeDocument/2006/relationships' => 'r')
+                   'http://schemas.openxmlformats.org/officeDocument/2006/relationships' => 'r',
+                   'http://schemas.microsoft.com/office/spreadsheetml/2021/extlinks2021' => nil)
 
     def xlsx_path
       ROOT.join('xl', 'externalLinks', "externalLink#{file_index}.xml")
